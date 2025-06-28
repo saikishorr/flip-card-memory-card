@@ -1,25 +1,24 @@
+/* Updated style.css */
 body, html{margin:0;font:normal 0/0 Arial, Helvetica, sans-serif;background:#333;overflow:hidden;color:#fff;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 body, html, .flipper, .f, .b, #g {width:100%;height:100%;}
 
-/* font-face */
 @font-face{font-family: "GeneralFoundicons";font-weight:normal;font-style:normal;
-	src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.eot");
-	src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.eot?#iefix") format("embedded-opentype"),
-	     url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.woff") format("woff"),
-	     url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.ttf") format("truetype"),
-	     url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.svg#GeneralFoundicons") format("svg");
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.eot");
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.eot?#iefix") format("embedded-opentype"),
+       url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.woff") format("woff"),
+       url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.ttf") format("truetype"),
+       url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/60583/general_foundicons.svg#GeneralFoundicons") format("svg");
 }
 a{text-decoration:none;color:#fff;display:block;font:bold 18px/75px 'Open Sans';text-transform:uppercase;text-align:center;padding:0;margin:0 1px;}
 a:hover{color:#fff;background:rgba(255, 255, 255, .1)}
 
-/* FRONT SCREEN */
 .logo{width:450px;height:450px;position:absolute;top:50%;left:50%;margin:-225px 0 0 -225px}
 .logo .card{width:50%;height:50%;cursor:default;position:relative}
 .logo .card.left.active{z-index:2}
@@ -40,9 +39,8 @@ a:hover{color:#fff;background:rgba(255, 255, 255, .1)}
 #stats li b{display:inline-block;font-size:12px;width:95px}
 #stats a {position:absolute;bottom:0;width:100%;margin-left:-15px;}
 
-.logo .info{font-size:11px;line-height:16px;text-align:center;color: rgba(255,255,255, .3);padding:0 25px;}
+.logo .info{font-size:12px;line-height:18px;text-align:center;color: rgba(255,255,255, .6);padding:0 25px;font-style:italic;}
 
-/*GAME SCREEN*/
 #g{margin-top:4px}
 #g .timer{width:0%;height:5px;position:absolute;top:0;background:#C0392B;z-index:1}
 @-webkit-keyframes timer {100% { width:100%; }}
@@ -52,7 +50,7 @@ a:hover{color:#fff;background:rgba(255, 255, 255, .1)}
 .pause{position:absolute;width:100%;height:100%;left:0;top:0;z-index:100;background:rgba(51, 51, 51, 0.78)}
 .pause::before{content:'PAUSED';width:100%;position:absolute;margin-top:-100px;top:50%;background:#C0392B;color:#fff;font:bold 80px/200px 'Open Sans';
 display:block;text-align:center;}
-/* card styles */
+
 #g .found{display:inline-block}
 .card{display:inline-block;-webkit-perspective:1000;-moz-perspective:1000;}
 .card:not(.active):hover{opacity:.8}
@@ -66,28 +64,29 @@ position:absolute;top:50%;margin-top:-50px;width:100%;text-align:center}
 .card.active .b{z-index:2;opacity:1}
 .card, .flipper, .logo .b{transition:400ms;-ms-transition:400ms;-webkit-transition:400ms;-moz-transition:400ms;-o-transition:400ms}
 .card.active .flipper, .b {transform:rotateY(180deg);-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);-ms-transform:rotateY(180deg);-o-transform:rotateY(180deg)}
-.logo .f, .card .b::before, .pause::before{-webkit-text-stroke: 1px #fff} /*webkit only*/
+.logo .f, .card .b::before, .pause::before{-webkit-text-stroke: 1px #fff}
+
 @media all and (max-width: 1680px) and (min-width: 640px){
-	.card .b::before{font-size:90px}
-	#g.medium .card .b::before{font-size:70px}
-	#g.hard .card .b::before{font-size:50px}
+  .card .b::before{font-size:90px}
+  #g.medium .card .b::before{font-size:70px}
+  #g.hard .card .b::before{font-size:50px}
 }
 @media all and (max-width: 640px) and (min-width: 470px){
-	.card .b::before{font-size:90px}
-	#g.medium .card .b::before{font-size:60px}
-	#g.hard .card .b::before{font-size:50px}
+  .card .b::before{font-size:90px}
+  #g.medium .card .b::before{font-size:60px}
+  #g.hard .card .b::before{font-size:50px}
 }
 @media all and (max-width: 470px) and (min-width: 0px){
-	.card .b::before{font-size:60px}
-	#g.medium .card .b::before{font-size:35px;-webkit-text-stroke:0;}
-	#g.hard .card .b::before{font-size:32px;-webkit-text-stroke:0;}
+  .card .b::before{font-size:60px}
+  #g.medium .card .b::before{font-size:35px;-webkit-text-stroke:0;}
+  #g.hard .card .b::before{font-size:32px;-webkit-text-stroke:0;}
 }
 @media all and (max-width: 640px) and (min-width: 0px){
-	a{line-height:50px;font-size:13px}
-	.logo{width:300px;height:300px;margin:-150px 0 0 -150px}
-	.logo .f{font:normal 80px/150px 'Open Sans'}
-	.logo .contentbox h2{font-size:16px;margin:24px 0;}
-	.logo .instructions h2{display:none}
-	.logo .instructions.contentbox p:nth-child(3){display:none}
-	#stats li b{width:auto}
+  a{line-height:50px;font-size:13px}
+  .logo{width:300px;height:300px;margin:-150px 0 0 -150px}
+  .logo .f{font:normal 80px/150px 'Open Sans'}
+  .logo .contentbox h2{font-size:16px;margin:24px 0;}
+  .logo .instructions h2{display:none}
+  .logo .instructions.contentbox p:nth-child(3){display:none}
+  #stats li b{width:auto}
 }
