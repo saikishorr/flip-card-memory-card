@@ -1,5 +1,15 @@
+// Updated script.js with background music
 $(function(){
-       
+  // Add background music
+  const bgMusic = new Audio('https://www.bensound.com/bensound-music/bensound-sunny.mp3');
+  bgMusic.loop = true;
+  bgMusic.volume = 0.4;
+
+  // Play music when any play button is clicked
+  $('.play').on('click', function(){
+    bgMusic.play();
+  });
+
   function set(key, value) { localStorage.setItem(key, value); }
   function get(key)        { return localStorage.getItem(key); }
   function increase(el)    { set(el, parseInt( get(el) ) + 1); }
@@ -42,61 +52,50 @@ $(function(){
     $('.c3').text(text.substring(2, 3));
     $('.c4').text(text.substring(3, 4));
 
-    // If won game
     if(text == 'nice'){
       increase('flip_won');
       decrease('flip_abandoned');
+      setTimeout(() => {
+        alert("You’re amazing! ❤️ I hope you had fun. — From Saikishor");
+      }, 500);
     }
-
-    // If lost game
     else if(text == 'fail'){
       increase('flip_lost');
       decrease('flip_abandoned');
     }
 
-    // Update stats
     updateStats();
   };
 
-  /* LOAD GAME ACTIONS */
-
-  // Init localStorage
   if( !get('flip_won') && !get('flip_lost') && !get('flip_abandoned') ){
-    //Overall Game stats
     set('flip_won', 0);
     set('flip_lost', 0);
     set('flip_abandoned', 0);
-    //Best times
     set('flip_casual', '-:-');
     set('flip_medium', '-:-');
     set('flip_hard', '-:-');
-    //Cards stats
     set('flip_matched', 0);
     set('flip_wrong', 0);
   }
 
-  // Fill stats
-  if( get('flip_won') > 0 || get('flip_lost') > 0 || get('flip_abandoned') > 0) {updateStats();}
+  if( get('flip_won') > 0 || get('flip_lost') > 0 || get('flip_abandoned') > 0) { updateStats(); }
 
-  // Toggle start screen cards
   $('.logo .card:not(".twist")').on('click', function(e){
     $(this).toggleClass('active').siblings().not('.twist').removeClass('active');
     if( $(e.target).is('.playnow') ) { $('.logo .card').last().addClass('active'); }
   });
 
-  // Start game
   $('.play').on('click', function(){
     increase('flip_abandoned');
-		$('.info').fadeOut();
+    $('.info').fadeOut();
 
     var difficulty = '',
         timer      = 1000,
         level      = $(this).data('level');
 
-    // Set game timer and difficulty   
     if     (level ==  8) { difficulty = 'simple'; timer *= level * 4; }
     else if(level == 18) { difficulty = 'medium'; timer *= level * 6; }
-    else if(level == 32) { difficulty = 'hard';   timer *= level * 8; }	    
+    else if(level == 32) { difficulty = 'hard';   timer *= level * 8; }
 
     $('#g').addClass(difficulty);
 
@@ -104,10 +103,9 @@ $(function(){
       var startGame  = $.now(),
           obj = [];
 
-      // Create and add shuffled cards to game
       for(i = 0; i < level; i++) { obj.push(i); }
 
-      var shu      = shuffle( $.merge(obj, obj) ),
+      var shu = shuffle( $.merge(obj, obj) ),
           cardSize = 100/Math.sqrt(shu.length);
 
       for(i = 0; i < shu.length; i++){
@@ -120,7 +118,6 @@ $(function(){
           '</div>').appendTo('#g');
       }
 
-      // Set card actions
       $('#g .card').on({
         'mousedown' : function(){
           if($('#g').attr('data-paused') == 1) {return;}
@@ -131,21 +128,19 @@ $(function(){
               var thisCard = $('#g .active .b[data-f='+data+']');
 
               if( thisCard.length > 1 ) {
-                thisCard.parents('.card').toggleClass('active card found').empty(); //yey
+                thisCard.parents('.card').toggleClass('active card found').empty();
                 increase('flip_matched');
 
-                // Win game
                 if( !$('#g .card').length ){
                   var time = $.now() - startGame;
                   if( get('flip_'+difficulty) == '-:-' || get('flip_'+difficulty) > time ){
-                    set('flip_'+difficulty, time); // increase best score
+                    set('flip_'+difficulty, time);
                   }
-
                   startScreen('nice');
                 }
               }
               else {
-                $('#g .card.active').removeClass('active'); // fail
+                $('#g .card.active').removeClass('active');
                 increase('flip_wrong');
               }
             }, 401);
@@ -153,21 +148,18 @@ $(function(){
         }
       });
 
-      // Add timer bar
       $('<i class="timer"></i>')
         .prependTo('#g')
         .css({
           'animation' : 'timer '+timer+'ms linear'
         })
         .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-          startScreen('fail'); // fail game
+          startScreen('fail');
         });
 
-      // Set keyboard (p)ause and [esc] actions
       $(window).off().on('keyup', function(e){
-        // Pause game. (p)
         if(e.keyCode == 80){
-          if( $('#g').attr('data-paused') == 1 ) { //was paused, now resume
+          if( $('#g').attr('data-paused') == 1 ) {
             $('#g').attr('data-paused', '0');
             $('.timer').css('animation-play-state', 'running');
             $('.pause').remove();
@@ -178,10 +170,8 @@ $(function(){
             $('<div class="pause"></div>').appendTo('body');
           }
         }
-        // Abandon game. (ESC)
         if(e.keyCode == 27){
           startScreen('flip');
-          // If game was paused
           if( $('#g').attr('data-paused') == 1 ){
             $('#g').attr('data-paused', '0');
             $('.pause').remove();
@@ -191,5 +181,4 @@ $(function(){
       });
     });
   });
-  
 });
