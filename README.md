@@ -24,20 +24,20 @@ Welcome to the **Flip Card Memory Game** – a fun and interactive memory challe
 ---
 
 ## 📂 Project Structure
-
+```
 flip-card-memory-card/
 ├── index.html
 ├── style.css
 └── script.js
-
+```
 ---
 
 ## 🚀 Getting Started
 
 1. Clone the repository:
-``
+```
    git clone https://github.com/saikishorr/flip-card-memory-card.git
-``
+```
 2. Open index.html in your browser.
 
 ## 🧠 How to Play
@@ -47,8 +47,8 @@ flip-card-memory-card/
 - Try to match all the pairs with the least number of moves.
 
 
-📄 License
-This project is open-source and available under the MIT License.
+##📄 License
+- This project is open-source and available under the MIT License.
 
-🙌 Acknowledgements
-Made with ❤️ by Saikishor Rasala
+## 🙌 Acknowledgements
+- Made with ❤️ by Saikishor Rasala
