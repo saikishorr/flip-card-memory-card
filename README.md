@@ -47,7 +47,7 @@ flip-card-memory-card/
 - Try to match all the pairs with the least number of moves.
 
 
-##📄 License
+## 📄 License
 - This project is open-source and available under the MIT License.
 
 ## 🙌 Acknowledgements
